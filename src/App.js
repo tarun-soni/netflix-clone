@@ -1,20 +1,21 @@
 import React from "react";
 import "./App.css";
-import Row from "./Components/Row";
+import Row from "./Components/Row/Row.js";
 import requests from "./requests";
+import Banner from "./Components/Banner/Banner";
+import Nav from "./Components/Nav/Nav";
 
 function App() {
   return (
     <div className="App">
+      <Nav />
+      <Banner />
       <Row
         title={"NETFLIX ORIGINALS"}
         fetchUrl={requests.fetchNetflixOriginals}
         isLargeRow
       />
-      {console.log(
-        "requests.fetchNetflixOriginals",
-        requests.fetchNetflixOriginals
-      )}
+
       <Row
         title={"TRENDING NOW"}
         fetchUrl={requests.fetchTrending}
@@ -23,22 +24,32 @@ function App() {
       <Row
         title={"NETFLIX ORIGINALS"}
         fetchUrl={requests.fetchTopRated}
-      /><Row
+      />
+
+      <Row
         title={"ACTION MOVIES"}
         fetchUrl={requests.fetchActionMovies}
-      /><Row
+      />
+
+      <Row
         title={"COMEDY MOVIES"}
         fetchUrl={requests.fetchComedyMovies}
-      /><Row
+      />
+
+      <Row
         title={"HORROR MOVIES"}
         fetchUrl={requests.fetchHorrorMovies}
-      /><Row
+      />
+
+      <Row
         title={"ROMCOM MOVIES"}
         fetchUrl={requests.fetchRomanceMovies}
-      /><Row
+      />
+      {/* 
+      <Row
         title={"DOCUMENTARIES"}
         fetchUrl={requests.fetchDocumentaries}
-      />
+      /> */}
 
     </div>
   );

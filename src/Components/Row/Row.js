@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../axios";
+import axios from "../../axios";
 import './Row.css'
 
 
@@ -9,14 +9,13 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await axios.get(`https://api.themoviedb.org/3${fetchUrl}`);
+      // const response = await axios.get(`https://api.themoviedb.org/3${fetchUrl}`);
+      const response = await axios.get(fetchUrl);
       setMovies(response.data.results);
-      console.log("response", response);
       return response;
     }
     fetchData();
 
-    console.log("movies", movies);
   }, [fetchUrl]);
 
   return (
