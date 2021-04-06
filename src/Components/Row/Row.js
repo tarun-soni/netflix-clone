@@ -7,7 +7,7 @@ import movieTrailer from "movie-trailer";
 const Row = ({ title, fetchUrl, isLargeRow }) => {
   const baseURL = "https://image.tmdb.org/t/p/original";
   const [movies, setMovies] = useState([]);
-
+  const [isMouseInside, setIsMouseInside] = useState(false);
   const [trailerUrl, setTrailerUrl] = useState("");
 
   useEffect(() => {
@@ -38,23 +38,33 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
         .catch((error) => console.error("error in trailer render", error));
     }
   };
+
   return (
     <div className="row">
       <h1>{title}</h1>
+
       <div className="row__posters">
         {movies.map((movie) => (
           <>
-            <img
-              className={`row__poster ${isLargeRow && "row__posterLarge"}`}
-              key={movie.id}
-              onClick={() => handleClick(movie)}
-              src={`${baseURL}${
-                isLargeRow ? movie.poster_path : movie.backdrop_path
-              }`}
-              alt={movie.name}
-            />
-
-            {/* <div className="movie__title">{movie.name}</div>   */}
+            <div className={`row__poster ${isLargeRow && "row__posterLarge"}`}>
+              <img
+                loading="lazy"
+                id={movie.id}
+                style={{ width: "15rem", height: "auto" }}
+                key={movie.id}
+                onClick={() => handleClick(movie)}
+                src={`${baseURL}${
+                  isLargeRow ? movie.poster_path : movie.backdrop_path
+                }`}
+                alt={movie.name}
+              />
+              <div
+                className="img-movite-title"
+                className={`img-title ${isLargeRow && "img-title__large"}`}
+              >
+                {movie?.title || movie?.name}
+              </div>
+            </div>
           </>
         ))}
       </div>
