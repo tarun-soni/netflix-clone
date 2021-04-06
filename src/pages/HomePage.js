@@ -10,7 +10,7 @@ const HomePage = () => {
   return (
     <>
       <Banner />
-      <Container>
+      <div className="mx-5">
         <Row
           title={"NETFLIX ORIGINALS"}
           fetchUrl={requests.fetchNetflixOriginals}
@@ -23,7 +23,7 @@ const HomePage = () => {
         <Row title={"HORROR MOVIES"} fetchUrl={requests.fetchHorrorMovies} />
         <Row title={"ROMCOM MOVIES"} fetchUrl={requests.fetchRomanceMovies} />
         <Row title={"DOCUMENTARIES"} fetchUrl={requests.fetchDocumentaries} />
-      </Container>
+      </div>
     </>
   );
 };

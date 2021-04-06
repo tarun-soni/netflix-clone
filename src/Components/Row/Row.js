@@ -33,11 +33,13 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
   return (
     <div className="row">
       <h1>{title}</h1>
-      <div className="row__posters">
+      <div className="row__posters ">
         {movies.map((movie) => (
           <Link to={`/movie/${movie.id}`}>
             <div
-              className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+              className={` text-white row__poster ${
+                isLargeRow && "row__posterLarge"
+              }`}
               onClick={() => handleClick(movie)}
             >
               <img

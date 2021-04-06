@@ -18,16 +18,16 @@ const Nav = () => {
   }, []);
 
   return (
-    <Link to="/">
-      <div className={`nav && ${show && "nav__black"}`}>
+    <div className={`nav && ${show && "nav__black"}`}>
+      <Link to="/">
         <img className="nav__logo" src={netflix_logo} alt="netflix-logo" />
-        <img
-          className="nav__avatar"
-          src="https://pbs.twimg.com/profile_images/1240119990411550720/hBEe3tdn_400x400.png"
-          alt="netflix-logo"
-        />
-      </div>
-    </Link>
+      </Link>
+      <img
+        className="nav__avatar"
+        src="https://pbs.twimg.com/profile_images/1240119990411550720/hBEe3tdn_400x400.png"
+        alt="netflix-logo"
+      />
+    </div>
   );
 };
 
