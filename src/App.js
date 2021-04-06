@@ -1,28 +1,35 @@
 import React from "react";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import "./App.css";
-import Row from "./Components/Row/Row.js";
-import requests from "./requests";
-import Banner from "./Components/Banner/Banner";
+import CustomModal from "./Components/CustomModal";
 import Nav from "./Components/Nav/Nav";
+import HomePage from "./pages/HomePage";
+import MovieDetails from "./pages/MovieDetails/MovieDetails";
+import { modalState } from "./store/movie";
 
 function App() {
   return (
-    <div className="App">
-      <Nav />
-      <Banner />
-      <Row
-        title={"NETFLIX ORIGINALS"}
-        fetchUrl={requests.fetchNetflixOriginals}
-        isLargeRow
-      />
-      <Row title={"TRENDING NOW"} fetchUrl={requests.fetchTrending} />"
-      <Row title={"NETFLIX ORIGINALS"} fetchUrl={requests.fetchTopRated} />
-      <Row title={"ACTION MOVIES"} fetchUrl={requests.fetchActionMovies} />
-      <Row title={"COMEDY MOVIES"} fetchUrl={requests.fetchComedyMovies} />
-      <Row title={"HORROR MOVIES"} fetchUrl={requests.fetchHorrorMovies} />
-      <Row title={"ROMCOM MOVIES"} fetchUrl={requests.fetchRomanceMovies} />
-      <Row title={"DOCUMENTARIES"} fetchUrl={requests.fetchDocumentaries} />
-    </div>
+    <>
+      <Router>
+        <Nav />
+        <div
+          className="App"
+          style={{ padding: "1rem 0", backgroundColor: "#111" }}
+        >
+          <main>
+            <Route path="/" exact>
+              <div style={{ padding: "5rem 0" }}>
+                <Redirect to="/homescreen" />
+              </div>
+            </Route>
+            <div style={{ backgroundColor: "#111" }}>
+              <Route path="/homescreen" component={HomePage} exact />
+              <Route path="/movie/:id" component={MovieDetails} exact />
+            </div>
+          </main>
+        </div>
+      </Router>
+    </>
   );
 }
 
