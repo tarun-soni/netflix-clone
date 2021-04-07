@@ -6,14 +6,15 @@
 
 .row > h1 {
   /* margin-top: 1.5rem; */
-  padding-top: 1.5rem;
+  /* padding-top: 1.5rem; */
   margin-bottom: 0;
 }
 .row__posters {
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
-  padding: 20px 20px;
+  /* padding: 20px 20px; */
+  padding: 20px 20px 0 0;
 }
 
 .row__posters::-webkit-scrollbar {
@@ -31,7 +32,7 @@
 
 .row__posterLarge {
   max-height: 300px;
-  padding: 20px 0 0 0;
+  /* padding: 20px 0 0 0; */
   /*t-r-b-l*/
 }
 

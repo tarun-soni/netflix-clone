@@ -12,3 +12,7 @@ const requests = {
 };
 
 export default requests;
+
+// https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${search-term}&page=4&include_adult=false
+
+// https://api.themoviedb.org/3/search/tv?api_key=<<api_key>>&language=en-US&page=1&include_adult=false

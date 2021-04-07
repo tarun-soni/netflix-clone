@@ -10,15 +10,18 @@ import {
 } from "react-bootstrap";
 import { useParams } from "react-router";
 import "./MovieDetails.scss";
-
+import getGenre from "../../utils/getGenres.js";
 const MovieDetails = () => {
   const baseURL = "https://image.tmdb.org/t/p/original";
 
   const [movieData, setMovieData] = useState(
     JSON.parse(localStorage.getItem("movie"))
   );
+
+  const [genres, setGenres] = useState([]);
   useEffect(() => {
     console.log("movieData", movieData);
+    let _genres = [];
   }, [localStorage, movieData]);
   return (
     <div className="top">
@@ -30,29 +33,20 @@ const MovieDetails = () => {
         }}
       >
         {/* <Row lg={8}> */}
-        {/* <Container
-            className="banner"
-            style={{
-              backgroundSize: "cover",
-              backgroundImage: `url("https://image.tmdb.org/t/p/original/${movieData?.backdrop_path}")`,
-              backgroundPosition: "center center",
-            }}
-          >
-            <Col md={4}>
-              <img
-                loading="lazy"
-                id={movieData.id}
-                style={{ width: "15rem", height: "auto" }}
-                key={movieData.id}
-                // onClick={() => handleClick(movieData)}
-                src={`${baseURL}${movieData.poster_path}`}
-                alt={movieData.name}
-              />
-            </Col>
-            <h2> title:</h2> */}
+        <Container
+          className="banner"
+          style={{
+            backgroundSize: "cover",
+            backgroundImage: `url("https://image.tmdb.org/t/p/original/${movieData?.backdrop_path}")`,
+            backgroundPosition: "center center",
+            opacity: "0.3",
+          }}
+        >
+          <Col md={4}></Col>
+        </Container>
 
         <Row>
-          <Col md={6}>
+          <Col md={4}>
             <Image
               loading="lazy"
               id={movieData.id}
@@ -64,15 +58,22 @@ const MovieDetails = () => {
               fluid
             />
           </Col>
-          <Col md={3}>
+          <Col md={6}>
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h4>{movieData.title || movieData.name}</h4>
               </ListGroup.Item>
 
-              <ListGroup.Item>d: </ListGroup.Item>
               <ListGroup.Item>
-                Description: {movieData?.description}
+                type :
+                {movieData?.first_air_date
+                  ? "TV series"
+                  : movieData?.release_date || movieData?.media_type === "movie"
+                  ? "Movie"
+                  : "Not Known"}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                Description: {movieData?.overview}
               </ListGroup.Item>
             </ListGroup>
           </Col>
@@ -82,8 +83,11 @@ const MovieDetails = () => {
               <ListGroup variant="flush">
                 <ListGroup.Item>
                   <Row>
-                    <Col>details:</Col>
-                    <Col></Col>
+                    <Col>
+                      {movieData?.genre_ids?.map((m) => (
+                        <h5>{getGenre(m)}</h5>
+                      ))}
+                    </Col>
                   </Row>
                 </ListGroup.Item>
               </ListGroup>
