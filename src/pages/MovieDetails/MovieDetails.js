@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import "./MovieDetails.scss";
 import getGenre from "../../utils/getGenres.js";
+import { addMovie } from "../../actions/movieActions";
 const MovieDetails = () => {
   const baseURL = "https://image.tmdb.org/t/p/original";
   const [hovered, setHovered] = useState(false);
@@ -21,7 +22,30 @@ const MovieDetails = () => {
     console.log("movieData", movieData);
   }, [localStorage, movieData]);
 
-  const addToFav = () => {};
+  const addToFav = async () => {
+    let _genres = [];
+    movieData.genre_ids.map((m) => {
+      _genres.push(getGenre(m));
+      return m;
+    });
+
+    const res = await addMovie({
+      movieId: movieData.id,
+      title: movieData?.title ? movieData.title : movieData.name,
+      type: "",
+      overview: movieData.overview,
+      genres: _genres,
+
+      poster_path: movieData.poster_path,
+      backdrop_path: movieData.backdrop_path,
+      vote_average: movieData.vote_average,
+      user: {
+        _id: "606dcfb7f6cfdc29e0c37585",
+        name: "User One",
+        email: "u1@example.com",
+      },
+    });
+  };
   return (
     <div className="top">
       <div
