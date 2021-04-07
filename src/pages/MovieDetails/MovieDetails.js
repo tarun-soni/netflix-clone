@@ -45,6 +45,7 @@ const MovieDetails = () => {
         email: "u1@example.com",
       },
     });
+    if (res) console.log(`res`, res);
   };
   return (
     <div className="top">

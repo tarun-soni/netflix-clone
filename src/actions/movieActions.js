@@ -1,17 +1,19 @@
 import Axios from "axios";
-
+const localURL = `http://localhost:5000`;
+const remoteURL = `https://movieflix-clone-backend.herokuapp.com`;
 export const addMovie = async (dataFromUser) => {
   const token = localStorage.getItem("userToken");
   console.log("dataFromUser :>> ", dataFromUser);
   const config = {
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmRjZmI3ZjZjZmRjMjllMGMzNzU4NSIsImlhdCI6MTYxNzgxMTY2NSwiZXhwIjoxNjIwNDAzNjY1fQ.IcErSTO22nQhpF3ZsBFUvnhuuK5uYWWyN961Mt6QMMs`,
+      Authorization: `Bearer ${token}`,
     },
   };
+
   try {
     const response = await Axios.post(
-      `http://localhost:5000/api/movie`,
+      `${remoteURL}/api/movie`,
       dataFromUser,
       config
     );
