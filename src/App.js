@@ -5,6 +5,7 @@ import CustomModal from "./Components/CustomModal";
 import Nav from "./Components/Nav/Nav";
 import HomePage from "./pages/HomePage";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
+import SearchPage from "./pages/SearchPage/SearchPage";
 import { modalState } from "./store/movie";
 
 function App() {
@@ -22,10 +23,11 @@ function App() {
                 <Redirect to="/homescreen" />
               </div>
             </Route>
-            <div style={{ backgroundColor: "#111" }}>
-              <Route path="/homescreen" component={HomePage} exact />
-              <Route path="/movie/:id" component={MovieDetails} exact />
-            </div>
+            {/* <div style={{ backgroundColor: "#111" }}> */}
+            <Route path="/searchPage" component={SearchPage} exact />
+            <Route path="/homescreen" component={HomePage} exact />
+            <Route path="/movie/:id" component={MovieDetails} exact />
+            {/* </div> */}
           </main>
         </div>
       </Router>

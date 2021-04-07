@@ -6,7 +6,7 @@ import movieTrailer from "movie-trailer";
 import { Link } from "react-router-dom";
 import { modalState } from "../../store/movie";
 
-const Row = ({ title, fetchUrl, isLargeRow }) => {
+const Row = ({ title = "", fetchUrl, isLargeRow }) => {
   const baseURL = "https://image.tmdb.org/t/p/original";
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
@@ -33,7 +33,7 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
   return (
     <div className="row">
       <h3>{title}</h3>
-      <div className="row__posters ">
+      <div className="row__posters">
         {movies.map((movie) => (
           <Link to={`/movie/${movie.id}`}>
             <div
