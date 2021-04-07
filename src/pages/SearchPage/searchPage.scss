@@ -1,15 +1,10 @@
-.row__posters {
+.search_row__posters {
   display: flex;
   overflow-y: hidden;
-  overflow-x: scroll;
   /* padding: 20px 20px; */
   padding: 20px 20px 0 0;
+  margin-top: 5rem;
 }
-
-.row__posters::-webkit-scrollbar {
-  display: none;
-}
-
 .row__poster {
   width: 100%;
   object-fit: contain;
@@ -18,9 +13,25 @@
   transition: transform 300ms;
   border-radius: 3px;
 }
+.row__poster1 {
+  width: 100%;
+  object-fit: contain;
+  margin-right: 10px;
+  transition: transform 300ms;
+  border-radius: 3px;
+  transition: transform 600ms;
+  :hover {
+    transform: scale(1.25);
+  }
+}
 
 .row__posterLarge {
   max-height: 300px;
   /* padding: 20px 0 0 0; */
   /*t-r-b-l*/
+}
+.search_img-title {
+  margin-top: -3rem;
+  // margin-left: rem;
+  /* color: antiquewhite; */
 }

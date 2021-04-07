@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../axios";
+import axios from "../../utils/axios";
 import "./Row.css";
 import Youtube from "react-youtube";
 import movieTrailer from "movie-trailer";
 import { Link } from "react-router-dom";
 import { modalState } from "../../store/movie";
 
-const Row = ({ title = "", fetchUrl, isLargeRow }) => {
+const Row = ({ title, fetchUrl, isLargeRow }) => {
   const baseURL = "https://image.tmdb.org/t/p/original";
   const [movies, setMovies] = useState([]);
   const [trailerUrl, setTrailerUrl] = useState("");
@@ -43,7 +43,7 @@ const Row = ({ title = "", fetchUrl, isLargeRow }) => {
               onClick={() => handleClick(movie)}
             >
               <img
-                loading="lazy"
+                // loading="lazy"
                 id={movie.id}
                 style={{ width: "15rem", height: "auto" }}
                 key={movie.id}

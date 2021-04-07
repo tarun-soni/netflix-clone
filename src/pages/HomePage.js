@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import { Container } from "react-bootstrap";
+import React from "react";
 import Banner from "../Components/Banner/Banner.js";
-import CustomModal from "../Components/CustomModal.js";
 
 import Row from "../Components/Row/Row.js";
-import { Row as BRow } from "react-bootstrap";
-import requests from "../requests.js";
+import requests from "../utils/requests";
+
 const HomePage = () => {
   return (
     <>

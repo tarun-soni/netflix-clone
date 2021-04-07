@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import "./App.css";
-import CustomModal from "./Components/CustomModal";
 import Nav from "./Components/Nav/Nav";
 import HomePage from "./pages/HomePage";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";

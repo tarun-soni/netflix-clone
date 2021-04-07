@@ -1,9 +1,9 @@
-import axios from "../../axios";
+import axios from "../../utils/axios";
 import React, { useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
-import { Container } from "react-bootstrap";
-
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import "./searchPage.scss";
 const SearchPage = () => {
   const baseURL = "https://image.tmdb.org/t/p/original";
 
@@ -25,9 +25,10 @@ const SearchPage = () => {
 
     try {
       const results = await axios.get(
-        `search/movie?api_key=${API_KEY}&language=en-US&query=${searchTerm}&page=${pageNumber}&include_adult=false`,
+        `search/multi?api_key=${API_KEY}&language=en-US&query=${searchTerm}&page=${pageNumber}&include_adult=false`,
         { cancelToken: cancelToken.token }
       );
+
       console.log("Results for " + searchTerm + ": ", results.data);
 
       setSearchResults(results?.data?.results);
@@ -43,46 +44,77 @@ const SearchPage = () => {
       style={{
         marginTop: "5rem",
         backgroundColor: "#111",
+        height: "100vh",
       }}
     >
-      <h4>SearchPage</h4>
-
-      <form
-        className="form-inline my-2 my-lg-0   "
-        // onSubmit={submitHandler}
-      >
-        <input
+      <Row>
+        <Col md={8}>
+          <h3>Search Movies / TV shows</h3>
+        </Col>
+      </Row>
+      <Form>
+        <Form.Control
           value={searchInput}
           // onChange={(e) => setBookInput(e.target.value)}
           onChange={handleChange}
           className="form-control mr-sm-2"
           type="text"
-          placeholder="Search Books"
+          placeholder="Search Movies / Series"
         />
-      </form>
+        {/* </Form.Control> */}
+      </Form>
 
-      <div className="row__posters">
-        {searchResults?.map((movie) => (
-          <Link to={`/movie/${movie.id}`}>
-            <div
-              className={`text-white row__poster`}
-              onClick={() => handleClick(movie)}
-            >
-              <img
-                loading="lazy"
-                id={movie.id}
-                style={{ width: "15rem", height: "auto" }}
-                key={movie.id}
-                src={`${baseURL}${movie.backdrop_path}`}
-                alt={movie.name}
-              />
-              <div className={`img-title `}>{movie?.title || movie?.name}</div>
+      <Container>
+        <Row className="mt-4">
+          {searchResults?.map((movie) => (
+            <div className="mx-5 my-4">
+              <CardDiv
+                baseURL={baseURL}
+                handleClick={handleClick}
+                movie={movie}
+              ></CardDiv>
             </div>
-          </Link>
-        ))}
-      </div>
+          ))}
+        </Row>
+
+        <Row className="search_row__posters">
+          {searchResults?.map((movie) => (
+            <Link to={`/movie/${movie.id}`}></Link>
+          ))}
+        </Row>
+      </Container>
     </Container>
   );
 };
 
 export default SearchPage;
+
+function CardDiv(props) {
+  return (
+    <Link to={`/movie/${props.movie.id}`}>
+      {props.movie?.poster_path && (
+        <Card
+          className={`text-white row__poster1`}
+          onClick={() => props.handleClick(props.movie)}
+        >
+          <img
+            loading="lazy"
+            id={props.movie.id}
+            style={{
+              width: "10rem",
+              height: "auto",
+              borderRadius: "2px",
+            }}
+            key={props.movie.id}
+            src={`${props.baseURL}${props.movie.poster_path}`}
+            alt={props.movie.name}
+          />
+
+          <div className={`search_img-title`}>
+            <Card.Text>{props.movie?.title || props.movie?.name}</Card.Text>
+          </div>
+        </Card>
+      )}
+    </Link>
+  );
+}

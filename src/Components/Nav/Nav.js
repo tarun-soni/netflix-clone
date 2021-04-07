@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import netflix_logo from "../../assets/netflix_logo.png";
-import "./Nav.css";
+import "./Nav.scss";
 const Nav = () => {
   const [show, handleShow] = useState(false);
   useEffect(() => {
@@ -25,9 +26,9 @@ const Nav = () => {
 
       <div className="search-div">
         <Link to="/searchPage">
-          <button className="btn btn-primary my-2 my-sm-0">
-            wanna search?
-          </button>
+          <Button variant="outline" className="btn my-2 ">
+            wanna search? ....
+          </Button>
         </Link>
       </div>
       <img
