@@ -21,9 +21,16 @@ import { myListState } from "../../store/movie";
 import { useRecoilState } from "recoil";
 import Loader from "../../Components/Loader";
 import { useHistory } from "react-router";
+import { userInfoState } from "../../store/login";
+import {
+  addedMovieAlert,
+  plsLoginAlert,
+  removeMovieAlert,
+} from "../../store/alerts";
 const MovieDetails = () => {
   const history = useHistory();
   const [myMovies, setMyMovies] = useRecoilState(myListState);
+  const [userInfo] = useRecoilState(userInfoState);
   const [alreadyFav, setAlreadyFav] = useState(false);
   const baseURL = "https://image.tmdb.org/t/p/original";
   const [hovered, setHovered] = useState(false);
@@ -32,37 +39,45 @@ const MovieDetails = () => {
   );
   const [loading, setLoading] = useState(false);
   const [compareData, setCompareData] = useState([]);
-
+  const [, setShowPlsLoginAlert] = useRecoilState(plsLoginAlert);
+  const [, setAddMovieAlert] = useRecoilState(addedMovieAlert);
+  const [, setRemoveMovieAlert] = useRecoilState(removeMovieAlert);
   const addToFav = async () => {
-    let _genres = [];
-    movieData.genre_ids.map((m) => {
-      _genres.push(getGenre(m));
-      return m;
-    });
+    if (!userInfo.isAuthenticated) {
+      setShowPlsLoginAlert(true);
+    } else {
+      let _genres = [];
+      movieData.genre_ids.map((m) => {
+        _genres.push(getGenre(m));
+        return m;
+      });
 
-    const res = await addMovie({
-      movieId: movieData.id,
-      title: movieData?.title ? movieData.title : movieData.name,
-      type: "",
-      overview: movieData.overview,
-      genres: _genres,
+      const res = await addMovie({
+        movieId: movieData.id,
+        title: movieData?.title ? movieData.title : movieData.name,
+        type: "",
+        overview: movieData.overview,
+        genres: _genres,
 
-      poster_path: movieData.poster_path,
-      backdrop_path: movieData.backdrop_path,
-      vote_average: movieData.vote_average,
-      user: {
-        _id: "606dcfb7f6cfdc29e0c37585",
-        name: "User One",
-        email: "u1@example.com",
-      },
-    });
-    if (res) console.log(`res`, res);
+        poster_path: movieData.poster_path,
+        backdrop_path: movieData.backdrop_path,
+        vote_average: movieData.vote_average,
+        user: {
+          _id: "606dcfb7f6cfdc29e0c37585",
+          name: "User One",
+          email: "u1@example.com",
+        },
+      });
+      if (res === "sucess") setAddMovieAlert(true);
+    }
   };
 
   const removeFav = async () => {
     console.log("remove");
     const id = movieData.id || movieData?.movieId;
     const deleteres = await removeMovie(id.toString());
+    if (deleteres === "success") setRemoveMovieAlert(true);
+
     history.push("/mylist");
   };
   useEffect(() => {
@@ -76,7 +91,7 @@ const MovieDetails = () => {
       setMyMovies(data);
       setLoading(false);
     })();
-  }, [localStorage, movieData, alreadyFav]);
+  }, [localStorage, movieData]);
 
   useEffect(() => {
     const currentId = movieData.id || movieData.movieId;
@@ -87,10 +102,12 @@ const MovieDetails = () => {
         return m.movieId === currentId.toString();
       })
     );
-  }, [myMovies]);
+  }, [myMovies, alreadyFav]);
 
   useEffect(() => {
-    if (compareData.includes(true)) setAlreadyFav(true);
+    if (compareData !== []) {
+      if (compareData?.includes(true)) setAlreadyFav(true);
+    }
   }, [compareData, myMovies]);
   return (
     <div className="top ">

@@ -14,7 +14,7 @@ export const addMovie = async (dataFromUser) => {
 
   try {
     const response = await Axios.post(
-      `${remoteURL}/api/movie`,
+      `${localURL}/api/movie`,
       dataFromUser,
       config
     );

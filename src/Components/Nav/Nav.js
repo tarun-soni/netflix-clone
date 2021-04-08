@@ -5,12 +5,31 @@ import { Link, useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { logoutUser } from "../../actions/userActions";
 import netflix_logo from "../../assets/netflix_logo.png";
+import {
+  addedMovieAlert,
+  plsLoginAlert,
+  removeMovieAlert,
+} from "../../store/alerts";
 import { userInfoState } from "../../store/login";
+import CustomToast from "../CustomToast";
 import "./Nav.scss";
 const Nav = () => {
   const [show, handleShow] = useState(false);
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const history = useHistory();
+
+  //alert states
+
+  const [addMovieAlertState, setAddMovieAlert] = useRecoilState(
+    addedMovieAlert
+  );
+  const [showPlsLoginAlert, setShowPlsLoginAlert] = useRecoilState(
+    plsLoginAlert
+  );
+  const [removeMovieAlertState, setRemoveMovieAlert] = useRecoilState(
+    removeMovieAlert
+  );
+
   const logout = async () => {
     await logoutUser();
     setUserInfo({
@@ -40,6 +59,27 @@ const Nav = () => {
 
   return (
     <div className={`nav && ${show && "nav__black"}`}>
+      {showPlsLoginAlert && (
+        <CustomToast
+          variant="danger"
+          onClose={() => setShowPlsLoginAlert(false)}
+          msg="Please Login to add Movies to Favs"
+        />
+      )}
+      {addMovieAlertState && (
+        <CustomToast
+          variant="success"
+          onClose={() => setAddMovieAlert(false)}
+          msg="Movie Added to your Fav list"
+        />
+      )}
+      {removeMovieAlertState && (
+        <CustomToast
+          variant="info"
+          onClose={() => setRemoveMovieAlert(false)}
+          msg="Movie Removed from your Fav list"
+        />
+      )}
       <Link to="/">
         <img className="nav__logo" src={netflix_logo} alt="netflix-logo" />
       </Link>
