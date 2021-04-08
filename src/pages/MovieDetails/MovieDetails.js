@@ -27,6 +27,7 @@ import {
   plsLoginAlert,
   removeMovieAlert,
 } from "../../store/alerts";
+import CircularProgress from "../../Components/CircularProgress/CircularProgress";
 const MovieDetails = () => {
   const history = useHistory();
   const [myMovies, setMyMovies] = useRecoilState(myListState);
@@ -176,6 +177,14 @@ const MovieDetails = () => {
                   ? "Movie"
                   : "Not Known"}
               </ListGroup.Item>
+
+              <ListGroup.Item>{movieData?.vote_average}</ListGroup.Item>
+              <ListGroup.Item>
+                <div style={{ width: "5rem", height: "5rem" }}>
+                  <CircularProgress percentage={movieData?.vote_average} />
+                </div>
+              </ListGroup.Item>
+
               <ListGroup.Item>
                 Description: {movieData?.overview}
               </ListGroup.Item>
