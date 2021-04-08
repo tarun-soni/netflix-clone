@@ -28,9 +28,7 @@ export const addMovie = async (dataFromUser) => {
 };
 
 export const getUserMovies = async (userid) => {
-  // const token = localStorage.getItem("userToken");
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwNmRjZmI3ZjZjZmRjMjllMGMzNzU4NSIsImlhdCI6MTYxNzg2MTkxNCwiZXhwIjoxNjIwNDUzOTE0fQ.0ekCEynK-CktjnlIYHjFYMly3B_azuUGJMxUV4ROObU";
+  const token = localStorage.getItem("userToken");
   const config = {
     headers: {
       "Content-Type": "application/json",

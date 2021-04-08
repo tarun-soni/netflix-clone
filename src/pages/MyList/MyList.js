@@ -9,8 +9,7 @@ const MyList = () => {
   const [myMovies, setMyMovies] = useState();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const userid = "606dcfb7f6cfdc29e0c37585";
-
+    const userid = localStorage.getItem("userId");
     (async () => {
       setLoading(true);
       const data = await getUserMovies(userid);
