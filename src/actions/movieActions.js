@@ -45,3 +45,26 @@ export const getUserMovies = async (userid) => {
     console.log(`error in add movie`, error);
   }
 };
+export const removeMovie = async (movie_id) => {
+  const token = localStorage.getItem("userToken");
+  console.log(`movie_id`, typeof movie_id);
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  try {
+    const response = await Axios.delete(
+      `${localURL}/api/movie/${movie_id}`,
+      config
+    );
+    console.log("response :>> ", response);
+    if (response?.status === 200) {
+      return "success";
+    } else return "failed";
+  } catch (error) {
+    console.log(`error in add movie`, error);
+  }
+};

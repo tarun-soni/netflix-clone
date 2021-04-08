@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Button,
   Card,
   Col,
@@ -11,18 +12,26 @@ import {
 } from "react-bootstrap";
 import "./MovieDetails.scss";
 import getGenre from "../../utils/getGenres.js";
-import { addMovie } from "../../actions/movieActions";
+import {
+  addMovie,
+  getUserMovies,
+  removeMovie,
+} from "../../actions/movieActions";
+import { myListState } from "../../store/movie";
+import { useRecoilState } from "recoil";
+import Loader from "../../Components/Loader";
+import { useHistory } from "react-router";
 const MovieDetails = () => {
+  const history = useHistory();
+  const [myMovies, setMyMovies] = useRecoilState(myListState);
+  const [alreadyFav, setAlreadyFav] = useState(false);
   const baseURL = "https://image.tmdb.org/t/p/original";
   const [hovered, setHovered] = useState(false);
   const [movieData, setMovieData] = useState(
     JSON.parse(localStorage.getItem("movie"))
   );
-
-  useEffect(() => {
-    console.log("movieData", movieData);
-    window.scrollTo(0, 0);
-  }, [localStorage, movieData]);
+  const [loading, setLoading] = useState(false);
+  const [compareData, setCompareData] = useState([]);
 
   const addToFav = async () => {
     let _genres = [];
@@ -49,8 +58,43 @@ const MovieDetails = () => {
     });
     if (res) console.log(`res`, res);
   };
+
+  const removeFav = async () => {
+    console.log("remove");
+    const id = movieData.id || movieData?.movieId;
+    const deleteres = await removeMovie(id.toString());
+    history.push("/mylist");
+  };
+  useEffect(() => {
+    console.log("movieData", movieData);
+    window.scrollTo(0, 0);
+
+    const userid = localStorage.getItem("userId");
+    (async () => {
+      setLoading(true);
+      const data = await getUserMovies(userid);
+      setMyMovies(data);
+      setLoading(false);
+    })();
+  }, [localStorage, movieData, alreadyFav]);
+
+  useEffect(() => {
+    const currentId = movieData.id || movieData.movieId;
+
+    setCompareData(
+      myMovies?.map((m) => {
+        console.log(`m`, m);
+        return m.movieId === currentId.toString();
+      })
+    );
+  }, [myMovies]);
+
+  useEffect(() => {
+    if (compareData.includes(true)) setAlreadyFav(true);
+  }, [compareData, myMovies]);
   return (
     <div className="top ">
+      {console.log(`compareData`, compareData)}
       <div
         style={{
           color: "white",
@@ -58,6 +102,18 @@ const MovieDetails = () => {
           padding: "2rem",
         }}
       >
+        <Row>
+          {loading && (
+            <div className="my-list__loader">
+              <Loader />
+            </div>
+          )}
+          {/* {!userInfo?.isAuthenticated && (
+            <Alert variant="danger" className="w-100">
+              You're not logged in, Please Login
+            </Alert>
+          )} */}
+        </Row>
         <Jumbotron
           className="banner demo-wrap"
           style={{
@@ -126,9 +182,9 @@ const MovieDetails = () => {
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
                     className={hovered ? "btn-danger" : "btn-dark"}
-                    onClick={addToFav}
+                    onClick={alreadyFav ? removeFav : addToFav}
                   >
-                    ADD TO FAV
+                    {alreadyFav ? "REMOVE FROM FAV" : "ADD TO FAV"}
                     <span className="svg-icon svg-icon-primary svg-icon-2x pl-2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
