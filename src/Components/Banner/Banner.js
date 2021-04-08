@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 import axios from "../../utils/axios";
 import requests from "../../utils/requests";
 import "./Banner.css";
 const Banner = () => {
   const [movie, setMovie] = useState([]);
-
+  const history = useHistory();
   useEffect(() => {
     async function fetchData() {
       const response = await axios.get(requests.fetchNetflixOriginals);
@@ -37,7 +38,12 @@ const Banner = () => {
 
         <div className="banner__buttons">
           <button className="banner__button">Play</button>
-          <button className="banner__button">My List</button>
+          <button
+            className="banner__button"
+            onClick={() => history.push("/mylist")}
+          >
+            My List
+          </button>
         </div>
 
         <h1 className="banner__desc">{truncate(movie?.overview, 150)}</h1>

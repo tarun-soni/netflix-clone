@@ -4,8 +4,8 @@ import "./App.css";
 import Nav from "./Components/Nav/Nav";
 import HomePage from "./pages/HomePage";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
+import MyList from "./pages/MyList/MyList";
 import SearchPage from "./pages/SearchPage/SearchPage";
-import { modalState } from "./store/movie";
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
             <Route path="/searchPage" component={SearchPage} exact />
             <Route path="/homescreen" component={HomePage} exact />
             <Route path="/movie/:id" component={MovieDetails} exact />
+            <Route path="/mylist" component={MyList} exact />
             {/* </div> */}
           </main>
         </div>

@@ -1,0 +1,16 @@
+.hover-animate {
+  transition: transform 300ms ease-in;
+  &:hover {
+    transform: scale(1.25);
+    text-decoration: none;
+  }
+}
+.fadeButton {
+  height: 3.25rem;
+  background-image: linear-gradient(
+    180deg,
+    transparent,
+    rgba(10, 10, 10, 0.61),
+    #111
+  );
+}
