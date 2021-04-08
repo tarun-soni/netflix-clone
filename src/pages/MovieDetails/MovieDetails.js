@@ -21,6 +21,7 @@ const MovieDetails = () => {
 
   useEffect(() => {
     console.log("movieData", movieData);
+    window.scrollTo(0, 0);
   }, [localStorage, movieData]);
 
   const addToFav = async () => {
@@ -49,7 +50,7 @@ const MovieDetails = () => {
     if (res) console.log(`res`, res);
   };
   return (
-    <div className="top">
+    <div className="top ">
       <div
         style={{
           color: "white",
@@ -58,31 +59,33 @@ const MovieDetails = () => {
         }}
       >
         <Jumbotron
-          className="jumpotron banner"
+          className="banner demo-wrap"
           style={{
             backgroundImage: `url("https://image.tmdb.org/t/p/original/${movieData?.backdrop_path}")`,
             backgroundSize: "cover",
-            opacity: "0.5",
+            opacity: "0.9",
           }}
         >
-          <h2>{movieData?.name}</h2>
-          <Image
-            loading="lazy"
-            id={movieData.id}
-            style={{ width: "15rem", height: "auto" }}
-            key={movieData.id}
-            // onClick={() => handleClick(movieData)}
-            src={`${baseURL}${movieData.poster_path}`}
-            alt={movieData.name}
-            fluid
-          />
-          {/* <p>
-            This is a simple hero unit, a simple jumbotron-style component for
-            calling extra attention to featured content or information.
-          </p> */}
-          <p>
-            <Button variant="primary">Learn more</Button>
-          </p>
+          <div className="jumbotron-content">
+            <h2>{movieData?.name || movieData?.title}</h2>
+            <Image
+              loading="lazy"
+              id={movieData.id}
+              style={{ width: "15rem", height: "auto" }}
+              key={movieData.id}
+              // onClick={() => handleClick(movieData)}
+              src={`${baseURL}${movieData.poster_path}`}
+              alt={movieData.name}
+              fluid
+            />
+            {/* <p>
+              This is a simple hero unit, a simple jumbotron-style component for
+              calling extra attention to featured content or information.
+            </p> */}
+            <p>
+              <Button variant="primary">Learn more</Button>
+            </p>
+          </div>
         </Jumbotron>
 
         <Row>

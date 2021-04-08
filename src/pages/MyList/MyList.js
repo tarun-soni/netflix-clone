@@ -6,8 +6,6 @@ import CardDiv from "../../Components/CardDiv/CardDiv";
 import { userInfoState } from "../../store/login";
 import "./MyList.scss";
 const MyList = () => {
-  const baseURL = "https://image.tmdb.org/t/p/original";
-
   const [myMovies, setMyMovies] = useState();
   const [loading, setLoading] = useState(false);
   const [userInfo] = useRecoilState(userInfoState);
@@ -60,9 +58,11 @@ const MyList = () => {
           {myMovies?.map((movie) => (
             <div className="mx-5 my-4">
               <CardDiv
-                baseURL={baseURL}
                 handleClick={handleClick}
                 movie={movie}
+                poster_path={movie?.poster_path}
+                title={movie?.name || movie?.title}
+                movieId={movie?.id || movie?.movieId}
               ></CardDiv>
 
               {/* {showRemoveBtn && (
