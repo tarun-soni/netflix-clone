@@ -11,7 +11,7 @@ const MyList = () => {
   const [myMovies, setMyMovies] = useState();
   const [loading, setLoading] = useState(false);
   const [userInfo] = useRecoilState(userInfoState);
-
+  // const [showRemoveBtn, setShowRemoveBtn] = useState(false);
   useEffect(() => {
     const userid = localStorage.getItem("userId");
     (async () => {
@@ -64,6 +64,10 @@ const MyList = () => {
                 handleClick={handleClick}
                 movie={movie}
               ></CardDiv>
+
+              {/* {showRemoveBtn && (
+                <button className="btn btn-danger"> Remove</button>
+              )} */}
             </div>
           ))}
         </Row>
