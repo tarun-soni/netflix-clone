@@ -10,6 +10,7 @@ import MyList from "./pages/MyList/MyList";
 import SearchPage from "./pages/SearchPage/SearchPage";
 import { userInfoState } from "./store/login";
 import { getUserById } from "./actions/userActions.js";
+// import PrivateRoute from "./Components/PrivateRoute";
 function App() {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
 
@@ -42,10 +43,7 @@ function App() {
     <>
       <Router>
         <Nav />
-        <div
-          className="App"
-          style={{ padding: "1rem 0", backgroundColor: "#111" }}
-        >
+        <div className="App">
           <main>
             <Route path="/" exact>
               <div style={{ padding: "5rem 0" }}>
@@ -58,6 +56,7 @@ function App() {
             <Route path="/homescreen" component={HomePage} exact />
             <Route path="/movie/:id" component={MovieDetails} exact />
             <Route path="/mylist" component={MyList} exact />
+            {/* <PrivateRoute path="/mylist" component={MyList} exact /> */}
             {/* </div> */}
           </main>
         </div>

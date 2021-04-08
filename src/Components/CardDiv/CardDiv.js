@@ -25,7 +25,7 @@ export default function CardDiv(props) {
           />
 
           <div className="fadeButton" style={{ marginTop: "-3rem" }}>
-            <Card.Text className="text-white pl-2 ">
+            <Card.Text className="text-white m-2">
               {props.movie?.title || props.movie?.name}
             </Card.Text>
           </div>

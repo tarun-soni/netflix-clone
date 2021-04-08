@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, NavDropdown } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { Link, Redirect, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { logoutUser } from "../../actions/userActions";
 import netflix_logo from "../../assets/netflix_logo.png";
@@ -57,24 +57,21 @@ const Nav = () => {
         alt="netflix-logo"
       />
 
-      {/* {userInfo?.isAuthenticated ? ( */}
       {userInfo.isAuthenticated ? (
-        <NavDropdown
-          // title={userInfo?.name?.toUpperCase()}
-          title={"            " + "            "}
-        >
+        <NavDropdown title={"            " + "            "}>
           <LinkContainer to="/my-list">
-            <NavDropdown.Item> {userInfo.name}</NavDropdown.Item>
+            <NavDropdown.Item disabled>
+              <h6>{userInfo.name}</h6>
+            </NavDropdown.Item>
           </LinkContainer>
           <NavDropdown.Item onClick={logout}>LOGOUT</NavDropdown.Item>
         </NavDropdown>
       ) : (
-        <NavDropdown
-          // title={userInfo?.name?.toUpperCase()}
-          title={"            " + "            "}
-        >
+        <NavDropdown title={"            " + "            "}>
           <LinkContainer to="/login">
-            <NavDropdown.Item>SIGN IN</NavDropdown.Item>
+            <NavDropdown.Item>
+              <h6>SIGN IN</h6>
+            </NavDropdown.Item>
           </LinkContainer>
         </NavDropdown>
       )}

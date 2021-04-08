@@ -1,5 +1,5 @@
 import axios from "../../utils/axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import { Card, Col, Container, Form, Row } from "react-bootstrap";
@@ -40,6 +40,11 @@ const SearchPage = () => {
   const handleClick = (movie) => {
     localStorage.setItem("movie", JSON.stringify(movie));
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Container
       style={{
@@ -50,10 +55,11 @@ const SearchPage = () => {
     >
       <Row>
         <Col md={8}>
-          <h3>Search Movies / TV shows</h3>
+          <h2 className="mt-4">Search Movie or TV Shows</h2>
         </Col>
       </Row>
-      <Form>
+
+      <Form className="mt-2">
         <Form.Control
           value={searchInput}
           // onChange={(e) => setBookInput(e.target.value)}
