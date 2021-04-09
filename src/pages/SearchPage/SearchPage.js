@@ -1,14 +1,13 @@
 import axios from "../../utils/axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
-import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import "./searchPage.scss";
+import CardDiv from "../../Components/CardDiv/CardDiv";
 const SearchPage = () => {
-  const baseURL = "https://image.tmdb.org/t/p/original";
-
   const [searchInput, setSearchInput] = useState("");
-  const [pageNumber, setPageNumber] = useState(1);
+  // add setPage for future pagination integration
+  const [pageNumber] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
   const API_KEY = process.env.REACT_APP_MOVIEDB_API_KEY;
 
@@ -39,6 +38,11 @@ const SearchPage = () => {
   const handleClick = (movie) => {
     localStorage.setItem("movie", JSON.stringify(movie));
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Container
       style={{
@@ -49,10 +53,11 @@ const SearchPage = () => {
     >
       <Row>
         <Col md={8}>
-          <h3>Search Movies / TV shows</h3>
+          <h2 className="mt-4">Search Movie or TV Shows</h2>
         </Col>
       </Row>
-      <Form>
+
+      <Form className="mt-2">
         <Form.Control
           value={searchInput}
           // onChange={(e) => setBookInput(e.target.value)}
@@ -66,21 +71,19 @@ const SearchPage = () => {
 
       <Container>
         <Row className="mt-4">
-          {searchResults?.map((movie) => (
-            <div className="mx-5 my-4">
-              <CardDiv
-                baseURL={baseURL}
-                handleClick={handleClick}
-                movie={movie}
-              ></CardDiv>
-            </div>
-          ))}
-        </Row>
-
-        <Row className="search_row__posters">
-          {searchResults?.map((movie) => (
-            <Link to={`/movie/${movie.id}`}></Link>
-          ))}
+          {searchResults
+            .filter((movie) => movie.poster_path)
+            .map((movie) => (
+              <div className="mx-5 my-4">
+                <CardDiv
+                  handleClick={handleClick}
+                  movie={movie}
+                  poster_path={movie?.poster_path}
+                  title={movie?.name || movie?.title}
+                  movieId={movie?.id || movie?.movieId}
+                ></CardDiv>
+              </div>
+            ))}
         </Row>
       </Container>
     </Container>
@@ -88,33 +91,3 @@ const SearchPage = () => {
 };
 
 export default SearchPage;
-
-function CardDiv(props) {
-  return (
-    <Link to={`/movie/${props.movie.id}`}>
-      {props.movie?.poster_path && (
-        <Card
-          className={`text-white row__poster1`}
-          onClick={() => props.handleClick(props.movie)}
-        >
-          <img
-            loading="lazy"
-            id={props.movie.id}
-            style={{
-              width: "10rem",
-              height: "auto",
-              borderRadius: "2px",
-            }}
-            key={props.movie.id}
-            src={`${props.baseURL}${props.movie.poster_path}`}
-            alt={props.movie.name}
-          />
-
-          <div className={`search_img-title`}>
-            <Card.Text>{props.movie?.title || props.movie?.name}</Card.Text>
-          </div>
-        </Card>
-      )}
-    </Link>
-  );
-}
