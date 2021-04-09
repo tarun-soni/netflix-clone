@@ -73,15 +73,19 @@ const SearchPage = () => {
 
       <Container>
         <Row className="mt-4">
-          {searchResults?.map((movie) => (
-            <div className="mx-5 my-4">
-              <CardDiv
-                baseURL={baseURL}
-                handleClick={handleClick}
-                movie={movie}
-              ></CardDiv>
-            </div>
-          ))}
+          {searchResults
+            .filter((movie) => movie.poster_path)
+            .map((movie) => (
+              <div className="mx-5 my-4">
+                <CardDiv
+                  handleClick={handleClick}
+                  movie={movie}
+                  poster_path={movie?.poster_path}
+                  title={movie?.name || movie?.title}
+                  movieId={movie?.id || movie?.movieId}
+                ></CardDiv>
+              </div>
+            ))}
         </Row>
       </Container>
     </Container>

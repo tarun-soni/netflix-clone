@@ -19,7 +19,7 @@ export default function CardDiv({
           onClick={() => handleClick(movie)}
         >
           <img
-            loading="lazy"
+            // loading="lazy"
             id={movieId}
             style={{
               width: "10rem",

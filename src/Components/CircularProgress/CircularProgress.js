@@ -1,22 +1,26 @@
 import React from "react";
-import { CircularProgressbar } from "react-circular-progressbar";
-import ChangingProgressProvider from "./ChangingProgressProvider";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import ProgressProvider from "./ProgressProvider";
+
 const CircularProgress = ({ percentage }) => {
   return (
     <>
-      <ChangingProgressProvider values={[percentage * 10]}>
+      <ProgressProvider valueStart={0} valueEnd={percentage * 10}>
         {(percentage) => (
           <CircularProgressbar
             value={percentage}
-            text={`${percentage}%`}
-            textColor="#f88"
-            trailColor="#d6d6d6"
-            style={{
-              backgroundColor: "#3e98c7",
-            }}
+            text={`${percentage / 10}`}
+            styles={buildStyles({
+              textColor: "white",
+              // pathColor: "#E50914",
+              pathColor: "#e31720",
+              trailColor: "#1c1c1c",
+              trailColor: "#3d3d3d",
+            })}
           />
         )}
-      </ChangingProgressProvider>
+      </ProgressProvider>
     </>
   );
 };

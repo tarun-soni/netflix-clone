@@ -36,4 +36,7 @@
   object-fit: contain;
   display: flex;
   width: 10rem;
+  @media (max-width: 768px) {
+    right: 4.5rem;
+  }
 }
