@@ -43,7 +43,7 @@ const Nav = () => {
   };
 
   useEffect(() => {
-    console.log("userInfo :>> ", userInfo);
+    // console.log("userInfo :>> ", userInfo);
 
     window.addEventListener("scroll", () => {
       if (window.scrollY > 80) {

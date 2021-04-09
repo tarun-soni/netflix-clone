@@ -28,8 +28,6 @@ const SearchPage = () => {
         { cancelToken: cancelToken.token }
       );
 
-      console.log("Results for " + searchTerm + ": ", results.data);
-
       setSearchResults(results?.data?.results);
     } catch (error) {
       console.log(error);

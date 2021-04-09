@@ -6,7 +6,7 @@ const USING_URL =
   process.env.REACT_APP_ENV === "production" ? remoteURL : localURL;
 export const addMovie = async (dataFromUser) => {
   const token = localStorage.getItem("userToken");
-  console.log("dataFromUser :>> ", dataFromUser);
+  // console.log("dataFromUser :>> ", dataFromUser);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const addMovie = async (dataFromUser) => {
       dataFromUser,
       config
     );
-    console.log("response :>> ", response);
+    // console.log("response :>> ", response);
     if (response?.status === 201) {
       return "success";
     } else return "failed";
@@ -48,13 +48,12 @@ export const getUserMovies = async (userid) => {
     else if (res.status === 401) return "loginAgain";
     else return "Error in getMovies";
   } catch (error) {
-    //   console.log(`error in get user movies`, error);
-    console.log(`error msg in get user movies`, error.message);
+    console.log(`error in get user movies`, error);
+    // console.log(`error msg in get user movies`, error.message);
   }
 };
 export const removeMovie = async (movie_id) => {
   const token = localStorage.getItem("userToken");
-  console.log(`movie_id`, typeof movie_id);
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -67,7 +66,7 @@ export const removeMovie = async (movie_id) => {
       `${USING_URL}/api/movie/${movie_id}`,
       config
     );
-    console.log("response :>> ", response);
+    // console.log("response :>> ", response);
     if (response?.status === 200) {
       return "success";
     } else return "failed";

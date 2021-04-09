@@ -21,11 +21,10 @@ export const loginUser = async (email, password) => {
       { email, password },
       config
     );
-    console.log("data :>> ", data);
     if (data) return data;
     else return null;
   } catch (err) {
-    console.log("err in login :>> ", err);
+    // console.log("err in login :>> ", err);
     console.log("err msg in login:>> ", err.message);
   }
 };
@@ -40,11 +39,11 @@ export const getUserById = async (id) => {
       },
     };
     const response = await Axios.get(`${USING_URL}/api/users/${id}`, config);
-    console.log("response :>> ", response);
+    // console.log("response :>> ", response);
     if (response.data) return response.data;
     else return "error";
   } catch (err) {
     console.log("err in getUserById :>> ", err);
-    console.log("err msg in getUserById :>> ", err.message);
+    // console.log("err msg in getUserById :>> ", err.message);
   }
 };

@@ -65,7 +65,6 @@ const MovieDetails = () => {
   };
 
   const removeFav = async () => {
-    console.log("remove");
     const id = movieData.id || movieData?.movieId;
     const deleteres = await removeMovie(id.toString());
     if (deleteres === "success") setRemoveMovieAlert(true);
@@ -73,7 +72,6 @@ const MovieDetails = () => {
     history.push("/mylist");
   };
   useEffect(() => {
-    console.log("movieData", movieData);
     window.scrollTo(0, 0);
 
     const userid = localStorage.getItem("userId");
