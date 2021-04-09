@@ -98,7 +98,7 @@ const Nav = () => {
       />
 
       {userInfo.isAuthenticated ? (
-        <NavDropdown title={"            " + "            "}>
+        <NavDropdown>
           <LinkContainer to="/my-list">
             <NavDropdown.Item disabled>
               <h6>{userInfo.name}</h6>
@@ -107,7 +107,7 @@ const Nav = () => {
           <NavDropdown.Item onClick={logout}>LOGOUT</NavDropdown.Item>
         </NavDropdown>
       ) : (
-        <NavDropdown title={"            " + "            "}>
+        <NavDropdown>
           <LinkContainer to="/login">
             <NavDropdown.Item>
               <h6>SIGN IN</h6>

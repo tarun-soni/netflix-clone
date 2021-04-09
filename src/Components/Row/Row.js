@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "../../utils/axios";
 import "./Row.css";
-import Youtube from "react-youtube";
-import movieTrailer from "movie-trailer";
 import { Link } from "react-router-dom";
-import { modalState } from "../../store/movie";
 
 const Row = ({ title, fetchUrl, isLargeRow }) => {
   const baseURL = "https://image.tmdb.org/t/p/original";
   const [movies, setMovies] = useState([]);
-  const [trailerUrl, setTrailerUrl] = useState("");
 
   useEffect(() => {
     async function fetchData() {
@@ -21,11 +17,6 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
     fetchData();
   }, [fetchUrl]);
 
-  const options = {
-    height: "390",
-    width: "100%",
-    playerVars: { autoplay: 1 },
-  };
   const handleClick = (movie) => {
     localStorage.setItem("movie", JSON.stringify(movie));
     // console.log("set");
@@ -60,7 +51,6 @@ const Row = ({ title, fetchUrl, isLargeRow }) => {
           </Link>
         ))}
       </div>
-      {trailerUrl && <Youtube videoId={trailerUrl} opts={options} />}
     </div>
   );
 };

@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  Button,
-  Card,
-  Col,
-  Container,
-  Image,
-  Jumbotron,
-  ListGroup,
-  Row,
-} from "react-bootstrap";
+import { Button, Col, Image, Jumbotron, ListGroup, Row } from "react-bootstrap";
 import "./MovieDetails.scss";
 import getGenre from "../../utils/getGenres.js";
 import {
@@ -35,9 +25,7 @@ const MovieDetails = () => {
   const [alreadyFav, setAlreadyFav] = useState(false);
   const baseURL = "https://image.tmdb.org/t/p/original";
   const [hovered, setHovered] = useState(false);
-  const [movieData, setMovieData] = useState(
-    JSON.parse(localStorage.getItem("movie"))
-  );
+  const [movieData] = useState(JSON.parse(localStorage.getItem("movie")));
   const [loading, setLoading] = useState(false);
   const [compareData, setCompareData] = useState([]);
   const [, setShowPlsLoginAlert] = useRecoilState(plsLoginAlert);
@@ -92,10 +80,12 @@ const MovieDetails = () => {
     (async () => {
       setLoading(true);
       const data = await getUserMovies(userid);
+      console.log(`data`, data);
       setMyMovies(data);
       setLoading(false);
     })();
-  }, [localStorage, movieData]);
+    // eslint-disable-next-line
+  }, [movieData]);
 
   useEffect(() => {
     const currentId = movieData.id || movieData.movieId;
@@ -105,13 +95,14 @@ const MovieDetails = () => {
         return m.movieId === currentId.toString();
       })
     );
-  }, [myMovies, alreadyFav]);
+  }, [myMovies, alreadyFav, movieData.id, movieData.movieId]);
 
   useEffect(() => {
     if (compareData !== []) {
       if (compareData?.includes(true)) setAlreadyFav(true);
     }
   }, [compareData, myMovies]);
+
   return (
     <div className="top ">
       <div
@@ -153,13 +144,6 @@ const MovieDetails = () => {
               alt={movieData.name}
               fluid
             />
-            {/* <p>
-              This is a simple hero unit, a simple jumbotron-style component for
-              calling extra attention to featured content or information.
-            </p> */}
-            {/* <p>
-              <Button variant="primary">Learn more</Button>
-            </p> */}
           </div>
         </Jumbotron>
 
@@ -234,7 +218,7 @@ const MovieDetails = () => {
                     >
                       <g
                         stroke="none"
-                        stroke-width="1"
+                        strokeWidth="1"
                         fill="none"
                         fill-rule="evenodd"
                       >

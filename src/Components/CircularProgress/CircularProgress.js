@@ -15,7 +15,7 @@ const CircularProgress = ({ percentage }) => {
               textColor: "white",
               // pathColor: "#E50914",
               pathColor: "#e31720",
-              trailColor: "#1c1c1c",
+              // trailColor: "#1c1c1c",
               trailColor: "#3d3d3d",
             })}
           />

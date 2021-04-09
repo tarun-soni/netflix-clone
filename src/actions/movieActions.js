@@ -2,6 +2,8 @@ import Axios from "axios";
 const localURL = `http://localhost:5000`;
 const remoteURL = `https://movieflix-clone-backend.herokuapp.com`;
 
+const USING_URL =
+  process.env.REACT_APP_ENV === "production" ? remoteURL : localURL;
 export const addMovie = async (dataFromUser) => {
   const token = localStorage.getItem("userToken");
   console.log("dataFromUser :>> ", dataFromUser);
@@ -14,7 +16,7 @@ export const addMovie = async (dataFromUser) => {
 
   try {
     const response = await Axios.post(
-      `${localURL}/api/movie`,
+      `${USING_URL}/api/movie`,
       dataFromUser,
       config
     );
@@ -37,12 +39,17 @@ export const getUserMovies = async (userid) => {
   };
 
   try {
-    const res = await Axios.get(`${localURL}/api/movie/user/${userid}`, config);
+    const res = await Axios.get(
+      `${USING_URL}/api/movie/user/${userid}`,
+      config
+    );
 
     if (res.status === 200) return res.data;
+    else if (res.status === 401) return "loginAgain";
     else return "Error in getMovies";
   } catch (error) {
-    console.log(`error in add movie`, error);
+    //   console.log(`error in get user movies`, error);
+    console.log(`error msg in get user movies`, error.message);
   }
 };
 export const removeMovie = async (movie_id) => {
@@ -57,7 +64,7 @@ export const removeMovie = async (movie_id) => {
 
   try {
     const response = await Axios.delete(
-      `${localURL}/api/movie/${movie_id}`,
+      `${USING_URL}/api/movie/${movie_id}`,
       config
     );
     console.log("response :>> ", response);

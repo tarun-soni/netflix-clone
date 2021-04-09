@@ -18,13 +18,16 @@ function App() {
     async function getData() {
       if (localStorage.getItem("userId") && localStorage.getItem("userToken")) {
         const res = await getUserById(localStorage.getItem("userId"));
-        setUserInfo({
-          ...userInfo,
-          userId: res?._id,
-          isAuthenticated: true,
-          name: res?.name,
-          email: res?.email,
-        });
+        console.log(`res app.js`, await res);
+        if (res) {
+          setUserInfo({
+            ...userInfo,
+            userId: res?._id,
+            isAuthenticated: true,
+            name: res?.name,
+            email: res?.email,
+          });
+        }
       } else {
         setUserInfo({
           token: null,

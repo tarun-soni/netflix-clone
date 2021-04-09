@@ -21,6 +21,7 @@ const MyList = () => {
       setMyMovies(data);
       setLoading(false);
     })();
+    // eslint-disable-next-line
   }, []);
   const handleClick = (movie) => {
     localStorage.setItem("movie", JSON.stringify(movie));
@@ -67,10 +68,6 @@ const MyList = () => {
                 title={movie?.name || movie?.title}
                 movieId={movie?.id || movie?.movieId}
               ></CardDiv>
-
-              {/* {showRemoveBtn && (
-                <button className="btn btn-danger"> Remove</button>
-              )} */}
             </div>
           ))}
         </Row>

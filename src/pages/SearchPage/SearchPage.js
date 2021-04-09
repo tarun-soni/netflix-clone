@@ -1,15 +1,13 @@
 import axios from "../../utils/axios";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import { Link } from "react-router-dom";
-import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import "./searchPage.scss";
 import CardDiv from "../../Components/CardDiv/CardDiv";
 const SearchPage = () => {
-  const baseURL = "https://image.tmdb.org/t/p/original";
-
   const [searchInput, setSearchInput] = useState("");
-  const [pageNumber, setPageNumber] = useState(1);
+  // add setPage for future pagination integration
+  const [pageNumber] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
   const API_KEY = process.env.REACT_APP_MOVIEDB_API_KEY;
 

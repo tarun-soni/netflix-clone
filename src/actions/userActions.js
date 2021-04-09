@@ -2,6 +2,8 @@ import Axios from "axios";
 const localURL = `http://localhost:5000`;
 const remoteURL = `https://movieflix-clone-backend.herokuapp.com`;
 
+const USING_URL =
+  process.env.REACT_APP_ENV === "production" ? remoteURL : localURL;
 export const logoutUser = async () => {
   localStorage.removeItem("userToken");
   localStorage.removeItem("userId");
@@ -15,7 +17,7 @@ export const loginUser = async (email, password) => {
     };
 
     const { data } = await Axios.post(
-      `${localURL}/api/users/login`,
+      `${USING_URL}/api/users/login`,
       { email, password },
       config
     );
@@ -23,7 +25,8 @@ export const loginUser = async (email, password) => {
     if (data) return data;
     else return null;
   } catch (err) {
-    console.log("err :>> ", err);
+    console.log("err in login :>> ", err);
+    console.log("err msg in login:>> ", err.message);
   }
 };
 
@@ -36,11 +39,12 @@ export const getUserById = async (id) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const { data } = await Axios.get(`${localURL}/api/users/${id}`, config);
-
-    if (data) return data;
-    else return null;
+    const response = await Axios.get(`${USING_URL}/api/users/${id}`, config);
+    console.log("response :>> ", response);
+    if (response.data) return response.data;
+    else return "error";
   } catch (err) {
-    console.log("err :>> ", err);
+    console.log("err in getUserById :>> ", err);
+    console.log("err msg in getUserById :>> ", err.message);
   }
 };

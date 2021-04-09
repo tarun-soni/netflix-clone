@@ -16,9 +16,9 @@ const Loader = () => {
           cy="50"
           fill="none"
           stroke="#E50914"
-          stroke-width="2"
+          strokeWidth="2"
           r="16"
-          stroke-dasharray="75.39822368615503 27.132741228718345"
+          strokeDasharray="75.39822368615503 27.132741228718345"
         >
           <animateTransform
             attributeName="transform"
