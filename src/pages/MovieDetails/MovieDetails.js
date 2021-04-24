@@ -31,6 +31,7 @@ const MovieDetails = () => {
   const [, setShowPlsLoginAlert] = useRecoilState(plsLoginAlert);
   const [, setAddMovieAlert] = useRecoilState(addedMovieAlert);
   const [, setRemoveMovieAlert] = useRecoilState(removeMovieAlert);
+
   const addToFav = async () => {
     if (!userInfo.isAuthenticated) {
       setShowPlsLoginAlert(true);
@@ -52,9 +53,9 @@ const MovieDetails = () => {
         backdrop_path: movieData.backdrop_path,
         vote_average: movieData.vote_average,
         user: {
-          _id: "606dcfb7f6cfdc29e0c37585",
-          name: "User One",
-          email: "u1@example.com",
+          _id: userInfo.userId,
+          name: userInfo.name,
+          email: userInfo.email,
         },
       });
       if (res === "success") {

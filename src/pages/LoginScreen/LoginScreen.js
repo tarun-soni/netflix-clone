@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { Redirect } from "react-router";
+import { Link } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { loginUser } from "../../actions/userActions";
 import { userInfoState } from "../../store/login";
@@ -54,7 +55,12 @@ const LoginScreen = () => {
         </Row>
         <Container className="form-container">
           <Form className="login-form" onSubmit={onSubmit}>
-            <Form.Label>Email</Form.Label>
+            <Form.Label
+              className="align-self-baseline font-weight-bold"
+              htmlFor="email"
+            >
+              Email
+            </Form.Label>
             <Form.Control
               className="w-100 m-2"
               type="email"
@@ -64,7 +70,12 @@ const LoginScreen = () => {
               value={email}
               onChange={(e) => onChange(e)}
             ></Form.Control>
-            <Form.Label htmlFor="email">Password</Form.Label>
+            <Form.Label
+              className="align-self-baseline font-weight-bold mt-2"
+              htmlFor="password"
+            >
+              Password
+            </Form.Label>
             <Form.Control
               className="w-100 m-2"
               type="password"
@@ -74,9 +85,16 @@ const LoginScreen = () => {
               value={password}
               onChange={(e) => onChange(e)}
             ></Form.Control>
-            <Button type="submit" variant="success">
+            <Button
+              type="submit"
+              variant="danger"
+              className="w-100 mt-4 lspace-small"
+            >
               Login
             </Button>
+            <h6 className="my-2">
+              Don't have an account? <Link to={"/register"}>Sign up </Link>
+            </h6>
           </Form>
           <div className="features">
             <div className="feature">

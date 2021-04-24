@@ -47,3 +47,24 @@ export const getUserById = async (id) => {
     // console.log("err msg in getUserById :>> ", err.message);
   }
 };
+
+export const registerUser = async (name, email, password) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await Axios.post(
+      `${USING_URL}/api/users`,
+      { name, email, password },
+      config
+    );
+
+    if (data) return data;
+    else return null;
+  } catch (err) {
+    console.log("err :>> ", err);
+  }
+};

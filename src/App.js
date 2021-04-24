@@ -5,6 +5,7 @@ import "./App.css";
 import Nav from "./Components/Nav/Nav";
 import HomePage from "./pages/HomePage";
 import LoginScreen from "./pages/LoginScreen/LoginScreen";
+import Register from "./pages/LoginScreen/Register";
 import MovieDetails from "./pages/MovieDetails/MovieDetails";
 import MyList from "./pages/MyList/MyList";
 import SearchPage from "./pages/SearchPage/SearchPage";
@@ -56,6 +57,7 @@ function App() {
             {/* <div style={{ backgroundColor: "#111" }}> */}
             <Route path="/searchPage" component={SearchPage} exact />
             <Route path="/login" component={LoginScreen} exact />
+            <Route path="/register" component={Register} exact />
             <Route path="/homescreen" component={HomePage} exact />
             <Route path="/movie/:id" component={MovieDetails} exact />
             <Route path="/mylist" component={MyList} exact />
