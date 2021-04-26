@@ -9,8 +9,8 @@ import "./Login.scss";
 const LoginScreen = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoState);
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "u1@example.com",
+    password: "1212",
   });
 
   const { email, password } = formData;

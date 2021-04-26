@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { registerUser } from "../../actions/userActions";
 import { userInfoState } from "../../store/login";
@@ -100,11 +100,14 @@ const Register = () => {
           ></Form.Control>
           <Button
             type="submit"
-            variant="success"
+            variant="danger"
             className="w-100 mt-4 lspace-small"
           >
             Register
           </Button>
+          <h6 className="my-2">
+            Have an account already? <Link to={"/login"}>LOGIN </Link>
+          </h6>
         </Form>
       </Container>
     </>
