@@ -6,6 +6,10 @@
 
 [movieflix-mern.netlify.app](https://movieflix-mern.netlify.app)
 
+
+[BACKEND REPO LINK](https://github.com/tarun-soni/netflix-clone-backend)
+
+
 - LIBRARIES AND TECHNOLOGIES USED
   - ReactJS
   - Apollo graphql
